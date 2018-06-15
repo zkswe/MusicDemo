@@ -147,6 +147,8 @@ static S_ACTIVITY_TIMEER REGISTER_ACTIVITY_TIMER_TAB[] = {
 static void onUI_init() {
     //Tips :添加 UI初始化的显示代码到这里,如:mText1->setText("123");
 	MUSICMANAGER->addMusicMessageListener(&sMusicMessageListener);
+	MUSICMANAGER->setVolume(0.5);
+	mSoundSeekbarPtr->setProgress(5);
 }
 
 static void onUI_quit() {
@@ -253,8 +255,22 @@ static void onProgressStopTrackingTouch_play_progress(ZKSeekBar *pSeekBar) {
 		sTrackProgress = -1;
 	}
 }
+
 static bool onButtonClick_Button_voice(ZKButton *pButton) {
     //LOGD(" ButtonClick Button_voice !!!\n");
+	mSoundWindowPtr->showWnd();
     return true;
 }
 
+static void onProgressChanged_SoundSeekbar(ZKSeekBar *pSeekBar, int progress) {
+//    LOGD(" ProgressChanged SoundSeekbar %d !!!\n", progress);
+	MUSICMANAGER->setVolume((float) progress / 10);
+}
+
+static void onProgressStartTrackingTouch_SoundSeekbar(ZKSeekBar *pSeekBar) {
+
+}
+
+static void onProgressStopTrackingTouch_SoundSeekbar(ZKSeekBar *pSeekBar) {
+
+}

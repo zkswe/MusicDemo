@@ -26,6 +26,8 @@
 #include "window/ZKSlideWindow.h"
 
 /*TAG:Macro宏ID*/
+#define ID_MUSIC_SoundSeekbar    91002
+#define ID_MUSIC_SoundWindow    110001
 #define ID_MUSIC_Button_voice    20006
 #define ID_MUSIC_SubItem1    20005
 #define ID_MUSIC_TEXT_ID3_PIC    50009

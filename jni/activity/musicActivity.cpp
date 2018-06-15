@@ -4,6 +4,8 @@
 #include "musicActivity.h"
 
 /*TAG:GlobalVariable全局变量*/
+static ZKSeekBar* mSoundSeekbarPtr;
+static ZKWindow* mSoundWindowPtr;
 static ZKButton* mButton_voicePtr;
 static ZKTextView* mTEXT_ID3_PICPtr;
 static ZKSeekBar* mSeekbar_play_progressPtr;
@@ -75,9 +77,9 @@ typedef struct {
 }S_ZKSeekBarCallback;
 /*TAG:SeekBarCallbackTab*/
 static S_ZKSeekBarCallback SZKSeekBarCallbackTab[] = {
+    ID_MUSIC_SoundSeekbar, onProgressChanged_SoundSeekbar, onProgressStartTrackingTouch_SoundSeekbar, onProgressStopTrackingTouch_SoundSeekbar,
     ID_MUSIC_Seekbar_play_progress, onProgressChanged_Seekbar_play_progress, onProgressStartTrackingTouch_play_progress, onProgressStopTrackingTouch_play_progress,
 };
-
 
 typedef int (*ListViewGetItemCountCallback)(const ZKListView *pListView);
 typedef void (*ListViewobtainListItemDataCallback)(ZKListView *pListView,ZKListView::ZKListItem *pListItem, int index);
@@ -146,6 +148,8 @@ const char* musicActivity::getAppName() const{
 //TAG:onCreate
 void musicActivity::onCreate() {
 	Activity::onCreate();
+    mSoundSeekbarPtr = (ZKSeekBar*)findControlByID(ID_MUSIC_SoundSeekbar);if(mSoundSeekbarPtr!= NULL){mSoundSeekbarPtr->setSeekBarChangeListener(this);}
+    mSoundWindowPtr = (ZKWindow*)findControlByID(ID_MUSIC_SoundWindow);
     mButton_voicePtr = (ZKButton*)findControlByID(ID_MUSIC_Button_voice);
     mTEXT_ID3_PICPtr = (ZKTextView*)findControlByID(ID_MUSIC_TEXT_ID3_PIC);
     mSeekbar_play_progressPtr = (ZKSeekBar*)findControlByID(ID_MUSIC_Seekbar_play_progress);if(mSeekbar_play_progressPtr!= NULL){mSeekbar_play_progressPtr->setSeekBarChangeListener(this);}
